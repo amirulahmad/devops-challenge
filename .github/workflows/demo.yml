@@ -19,7 +19,7 @@ jobs:
         WITH_V: true
         DRY_RUN: true # Determine the tag version
     - name: Step 2b - Print previous tag
-      run: "echo 'New Version: ${{steps.tag.outputs.tag}}'"
+      run: "echo 'Previous Version: ${{steps.tag.outputs.tag}}'"
     - name: Step 2c - Print new tag
       run: "echo 'New Version: ${{steps.tag.outputs.new_tag}}'"
     - name: Step 3 - Set up JDK 11
@@ -31,9 +31,9 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Step 4 - Build with Maven
       run: mvn -B package -DartifactId.version=${{steps.tag.outputs.tag}} --file pom.xml
-    # - name: Step 5 - List current directory
-    #   run: ls -al
-    # - name: Step 6 - List the target directory
-    #   run: |
-    #     cd target
-    #     ls -al
+    - name: Step 5 - List current directory
+      run: ls -al
+    - name: Step 6 - List the target directory
+      run: |
+        cd target
+        ls -al

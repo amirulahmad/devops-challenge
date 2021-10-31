@@ -30,9 +30,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        # settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Step 4 - Update tag release on Maven
       run: mvn -B release:update-versions -DdevelopmentVersion=${{steps.tag.outputs.new_tag}}-SNAPSHOT
     - name: Step 5 - Build with Maven

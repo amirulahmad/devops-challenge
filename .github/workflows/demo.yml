@@ -24,3 +24,11 @@ jobs:
         distribution: 'adopt'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
+    - name: Step 4 - Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Step 5 - List current directory
+      run: ls -al
+    - name: Step 6 - List the target directory
+      run: 
+        cd target
+        ls -al

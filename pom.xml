@@ -37,5 +37,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub amirulahmad Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/amirulahmad/devops-challenge</url>
+		</repository>
+	</distributionManagement>
 
 </project>

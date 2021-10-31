@@ -35,9 +35,9 @@ jobs:
       run: mvn -B release:update-versions -DdevelopmentVersion=${{steps.tag.outputs.new_tag}}-SNAPSHOT
     - name: Step 5 - Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Step 5 - List current directory
+    - name: Step 6 - List current directory
       run: ls -al
-    - name: Step 6 - List the target directory
-      run: |
-        cd target
-        ls -al
+    - name: Step 7 - List the target directory
+      run: ls -al
+    - name: Step 8 - Publish the package
+      run: mvn deploy

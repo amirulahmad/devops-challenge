@@ -18,8 +18,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DRY_RUN: true # Determine the tag version
-        INITIAL_VERSION: '0.1.0'
-        DEFAULT_BUMP: minor
     - name: Step 2b - Print previous tag
       run: "echo 'Previous Version: ${{steps.tag.outputs.tag}}'"
     - name: Step 2c - Print new tag
@@ -29,8 +27,7 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        # settings-path: ${{ github.workspace }} # location for the settings.xml file
+        server-id: github 
     - name: Step 4 - Update tag release on Maven
       run: mvn -B release:update-versions -DdevelopmentVersion=${{steps.tag.outputs.new_tag}}-SNAPSHOT
     - name: Step 5 - Build with Maven
@@ -45,3 +42,9 @@ jobs:
       run: mvn -B deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Step 9 - Create a Release
+      uses: elgohr/Github-Release-Action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        args: Release ${{steps.tag.outputs.new_tag}}
